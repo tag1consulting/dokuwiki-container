@@ -1,14 +1,14 @@
 FROM centos:7
 
-ENV PATH=$PATH:/opt/rh/php71u/root/usr/bin
+ENV PATH=$PATH:/opt/rh/php72u/root/usr/bin
 
 RUN yum install -y epel-release && yum install -y https://$(rpm -E '%{?centos:centos}%{!?centos:rhel}%{rhel}').iuscommunity.org/ius-release.rpm && \
-    INSTALL_PKGS="php71u php71u-cli php71u-mysqlnd php71u-pgsql php71u-bcmath \
-                  php71u-gd php71u-intl php71u-ldap php71u-mbstring php71u-pdo \
-                  php71u-process php71u-soap php71u-opcache php71u-xml \
-                  php71u-gmp php71u-pecl-apcu php71u-pecl-memcached \
-                  php71u-xml php71u-mbstring \
-                  php71u-gd php71u-zip php71u-mcrypt \
+    INSTALL_PKGS="php72u php72u-cli php72u-mysqlnd php72u-pgsql php72u-bcmath \
+                  php72u-gd php72u-intl php72u-ldap php72u-mbstring php72u-pdo \
+                  php72u-process php72u-soap php72u-opcache php72u-xml \
+                  php72u-gmp php72u-pecl-apcu php72u-pecl-memcached \
+                  php72u-xml php72u-mbstring \
+                  php72u-gd php72u-zip php72u-mcrypt \
                   wget curl git unzip" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS --nogpgcheck && \
     yum clean all -y

@@ -1,5 +1,7 @@
 # A simple DokuWiki container
 
+[![Docker Repository on Quay](https://quay.io/repository/tag1consulting/dokuwiki/status?token=5cae1a99-7add-4449-83f5-cf1880507a64 "Docker Repository on Quay")](https://quay.io/repository/tag1consulting/dokuwiki)
+
 A simple starting point for hosting DokuWiki in a container.
 
 ## Installation
@@ -7,7 +9,6 @@ A simple starting point for hosting DokuWiki in a container.
 Clone this repository, cd into the dokuwiki-container directory, and then run
 the following commands:
 ```
-cd app
 docker-compose build && docker-compose up
 ```
 
