@@ -1,0 +1,80 @@
+# Default values for dokuwiki.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: quay.io/tag1consulting/dokuwiki
+  tag: centos7 # switch to v2018-04-22b when done testing
+  pullPolicy: Always
+
+imagePullSecrets:
+  - name: tag1consulting-tag1docbot-pull-secret
+nameOverride: ""
+fullnameOverride: ""
+
+# Image config
+dokuwiki:
+  fullname: "tag1docs"
+  name: "dokuwiki"
+  pvc: "dokuiwiki-data-pvc"
+
+service:
+  type: LoadBalancer
+  port: 80
+  #httpsPort: 443
+  # Preserve source IP http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
+  externalTrafficPolicy: Cluster
+
+ingress:
+  enabled: false
+  hostname: docs.tag1consulting.com
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    #  kubernetes.io/tls-acme: "true"
+  hosts:
+    - name: docs.local
+      tls: false
+      certManager: false
+      tlsSecret: docs.local-tls
+      annotations:
+      #  kubernetes.io/tls-acme: true
+
+persistence:
+  enabled: true
+  storageClass: "gp2"
+  accessMode: ReadWriteOnce
+  size: 8Gi
+  path: /var/www/html
+
+resources:
+  limits:
+    cpu: 800m
+    memory: 768Mi
+  requests:
+    cpu: 300m
+    memory: 512Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Configure extra options for liveness and readiness probes
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes)
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
