@@ -1,13 +1,14 @@
 # A simple DokuWiki container
 
-A simple starting point for hosting DokuWiki in a container. 
+A simple starting point for hosting DokuWiki in a container.
 
 ## Installation
 
 Clone this repository, cd into the dokuwiki-container directory, and then run
 the following commands:
 ```
-	docker-compose build && docker-compose up
+cd app
+docker-compose build && docker-compose up
 ```
 
 Then visit the following URL to configure the wiki:
@@ -26,7 +27,7 @@ For full details, visit https://www.dokuwiki.org/dokuwiki
 
 ## Customizations
 
-The base container starts with the Alpine distribution, adding lighttpd and
+The base container starts with the Centos 7 distribution, adding Apahe and
 all PHP requirements along with DokuWiki.
 
 ### DokuWiki version
@@ -40,14 +41,14 @@ You can comment out the line in Dockerfile that installs `php7-curl` and
 `php7-openssl` if you do not want to install extensions through the DokuWiki
 administrative Extension Manager. Extensions can still be installed manually.
 
-### Listening port (default: 8080)
+### Listening port (default: 80)
 
-To change which port lighttpd listens on, edit `lighttpd/lighttpd.conf` changing:
+To change which port Apache listens on, edit `app/apache.conf` changing:
 ```
-	server.port          = 8080
+	<VirtualHost *:80>
 ```
-from `8080` to your desired port. Then, also edit the `EXPOSE` toward the end of
-Dockerfile, again changing `8080` to your new port.
+from `80` to your desired port. Then, also edit the `EXPOSE` toward the end of
+Dockerfile, again changing `808 to your new port.
 
 ## TODO
  - install/enable some plugins
