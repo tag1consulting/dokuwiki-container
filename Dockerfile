@@ -9,8 +9,9 @@ RUN yum install -y epel-release && yum install -y https://$(rpm -E '%{?centos:ce
                   php72u-gmp php72u-pecl-apcu php72u-pecl-memcached \
                   php72u-xml php72u-mbstring \
                   php72u-gd php72u-zip php72u-mcrypt \
-                  wget curl git unzip" && \
+                  wget curl git unzip yum-plugin-security" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS --nogpgcheck && \
+    yum --security update && \
     yum clean all -y
 
 # set recommended PHP.ini settings
