@@ -38,7 +38,8 @@ WORKDIR /var/www/html
 # The version of Dokuwiki to install: (see https://github.com/splitbrain/dokuwiki/releases )
 ENV DOKUWIKI_INSTALL="release_stable_2018-04-22b.tar.gz"
 RUN wget -q --continue https://github.com/splitbrain/dokuwiki/archive/${DOKUWIKI_INSTALL} && \
-  tar xzf ${DOKUWIKI_INSTALL} --directory /var/www/ --strip 1 && \
+  mkdir /var/www/dokuwiki && \
+  tar xzf ${DOKUWIKI_INSTALL} --directory /var/www/dokuwiki --strip 1 && \
   rm ${DOKUWIKI_INSTALL} && \
   chown -R apache:apache /var/www/dokuwiki/data && \
   chown -R apache:apache /var/www/dokuwiki/conf
