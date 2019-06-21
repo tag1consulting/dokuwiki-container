@@ -1,7 +1,5 @@
 FROM centos:7
 
-ENV PATH=$PATH:/opt/rh/php72u/root/usr/bin
-
 RUN yum install -y epel-release && yum install -y https://$(rpm -E '%{?centos:centos}%{!?centos:rhel}%{rhel}').iuscommunity.org/ius-release.rpm && \
     INSTALL_PKGS="php72u php72u-cli php72u-mysqlnd php72u-pgsql php72u-bcmath \
                   php72u-gd php72u-intl php72u-ldap php72u-mbstring php72u-pdo \

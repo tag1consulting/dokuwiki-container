@@ -13,7 +13,7 @@ docker-compose build && docker-compose up
 ```
 
 Then visit the following URL to configure the wiki:
-	http://localhost:8080/install.php
+	http://localhost80/install.php
 
 To ssh into the container, use the following command:
 ```
@@ -49,7 +49,7 @@ To change which port Apache listens on, edit `app/apache.conf` changing:
 	<VirtualHost *:80>
 ```
 from `80` to your desired port. Then, also edit the `EXPOSE` toward the end of
-Dockerfile, again changing `808 to your new port.
+Dockerfile, again changing `80 to your new port.
 
 ## TODO
  - install/enable some plugins
