@@ -33,6 +33,9 @@ COPY apache.conf /etc/httpd/conf.d/default_vhost.conf
 
 WORKDIR /var/www/html
 
+# Put something in the /var/www/html docroot so the container won't go into a restart loop on provision 
+COPY index.php /var/www/html/index.php
+
 # Installing dokuwiki
 #
 # The version of Dokuwiki to install: (see https://github.com/splitbrain/dokuwiki/releases )
