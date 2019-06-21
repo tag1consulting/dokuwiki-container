@@ -28,7 +28,7 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
           - name: dokuwiki-data
-            mountPath: /mnt/data
+            mountPath: /var/www/html
           ports:
             - name: http
               containerPort: 80
