@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tag1-internal-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+  - hosts:
+    - docs.tag1consulting.com
+    secretName: tag1-wildcard-tls
+  rules:
+  - host: docs.tag1consulting.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: tag1docs-svc
+          servicePort: 80
