@@ -8,7 +8,7 @@ spec:
   tls:
   - hosts:
     - docs.tag1consulting.com
-    secretName: tag1-wildcard-tls
+    secretName: tag1-tls-wildcard
   rules:
   - host: docs.tag1consulting.com
     http:
