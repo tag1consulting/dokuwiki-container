@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - docs.tag1consulting.com
+    - wiki.tag1consulting.com
     secretName: tag1-tls-wildcard
   rules:
-  - host: docs.tag1consulting.com
+  - host: wiki.tag1consulting.com
     http:
       paths:
       - path: /
