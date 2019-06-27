@@ -1,22 +1,30 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: dokuwiki-ingress
-  namespace: dokuwiki
+  name: "dokuwiki-ingress"
+  namespace: "dokuwiki"
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:814703134064:certificate/a267ec87-30c5-48b7-9fde-a45a219f340e
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+  labels:
+    app: dokuwiki
 spec:
   tls:
-  - hosts:
-    - wiki.tag1consulting.com
+    - hosts:
+      - wiki.tag1consulting.com
   rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: "tag1docs-svc"
+              servicePort: 80
     - host: wiki.tag1consulting.com
       http:
         paths:
-          - path: /
+          - path: /*
             backend:
-              serviceName: tag1docs-svc
+              serviceName: "tag1docs-svc"
               servicePort: 80
