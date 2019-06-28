@@ -24,7 +24,7 @@ spec:
         - name: tag1consulting-tag1docbot-pull-secret
       containers:
         - name: dokuwiki
-          image: "quay.io/tag1consulting/dokuwiki:v1.0.0"
+          image: "quay.io/tag1consulting/dokuwiki:v1.0.1"
           imagePullPolicy: Always
           volumeMounts:
           - name: dokuwiki-data
