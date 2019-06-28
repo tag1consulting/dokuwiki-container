@@ -28,8 +28,11 @@ RUN { \
 		echo 'memory_limit=250M'; \
 	} > /etc/php.d/php_defaults.ini
 
-
+# Copy in Apache host config
 COPY apache.conf /etc/httpd/conf.d/default_vhost.conf
+
+# Don't let Apache try to listen on 80, it's not starting as root so it can't
+RUN sed -i 's/^Listen 80$/#Listen 80/' /etc/httpd/conf/httpd.conf
 
 WORKDIR /var/www/html
 
@@ -47,9 +50,15 @@ RUN wget -q --continue https://github.com/splitbrain/dokuwiki/archive/${DOKUWIKI
   chown -R apache:apache /var/www/dokuwiki/data && \
   chown -R apache:apache /var/www/dokuwiki/conf
 
+# Log to stdout/stderr
 RUN ln -sfT /dev/stdout /var/log/httpd/access_log
+RUN ln -sfT /dev/stderr /var/log/httpd/error_log
+# Make sure apache has write permission to logs, pid, etc.
+RUN chown -R apache /var/log/httpd /run/httpd/
+
 COPY start.sh /tmp/start.sh
 
-EXPOSE 80
+EXPOSE 8080
 
+USER apache
 ENTRYPOINT [ "/tmp/start.sh" ]
